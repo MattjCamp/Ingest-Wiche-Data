@@ -42,7 +42,7 @@ read.one.csv.file <- function(csv.file){
   
   data$Metro <- gsub(".csv", "", gsub("-Table 1", "", csv.file))
   
-  data$Metro <- gsub(dirs$data.sources, "", data$Metro)
+  data$Metro <- gsub(data.sources, "", data$Metro)
   
   # Re-arrange columns for appearance sake
   
@@ -60,12 +60,12 @@ read.data <- function(){
 
   d <- NULL
 
-  files <- list.files(dirs$data.sources)
+  files <- list.files(data.sources)
 
   for (csv.file in files)
     d <- rbind(d,
       read.one.csv.file(sprintf("%s%s",
-                                dirs$data.sources,
+                                data.sources,
                                 csv.file)))
 
   return(d)

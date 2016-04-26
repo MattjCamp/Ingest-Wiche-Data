@@ -1,8 +1,14 @@
 
+source(sprintf("%s/R-Code-Library/sql.data.source/sqlite.R",
+               getwd()))
 
-dirs <- list()
-dirs$r.lib <- sprintf("%sR-Code-Library/",
-                      dirs$proj)
-dirs$data.sources <- sprintf("%sdata-sources/",
-                             getwd())
+data.sources <- sprintf("%s/data-sources/",
+                        getwd())
 
+source("read.data.R")
+
+df <- read.data()
+
+db <- sqlite(sprintf("%s/dashboard.db", getwd()))
+
+db$saveTable(df = df, tablename = "df")
