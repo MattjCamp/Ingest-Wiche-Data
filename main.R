@@ -14,14 +14,11 @@ library(stringr)
 source(sprintf("%s/R-Code-Library/sql.data.source/sqlite.R",
                getwd()))
 source("read.data.R")
-
 data.sources <- sprintf("%s/data-sources/",
                         getwd())
-
-df <- read.data()
-
 db <- sqlite(sprintf("%s/dashboard.db", getwd()))
 
+df <- read.data()
 db$dropTable("raw_data")
 db$saveTable(df = df, tablename = "raw_data")
 
@@ -29,9 +26,7 @@ d <- melt(data = df,
           id.vars = c(1:2),
           measure.vars = c(3:8)
           )
-
 d <- d[order(d$Metro, d$Academic_Year), ]
-
 db$dropTable(tablename = "raw_long")
 db$saveTable(df = d, tablename = "raw_long")
 

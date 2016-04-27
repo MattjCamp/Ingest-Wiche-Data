@@ -64,9 +64,9 @@ read.data <- function(){
 
   for (csv.file in files)
     d <- rbind(d,
-      read.one.csv.file(sprintf("%s%s",
-                                data.sources,
-                                csv.file)))
+               read.one.csv.file(sprintf("%s%s",
+                                         data.sources,
+                                         csv.file)))
 
   return(d)
 
