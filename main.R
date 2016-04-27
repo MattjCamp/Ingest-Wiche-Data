@@ -4,13 +4,10 @@
 # and generates a dataset without the race subgroups.
 #
 # Everything is stored in the SQL database named
-# dashboard.db
+# dashboard.db. 
 #
-# Tablenames:
-#   df_raw : raw combined data files
-#   df_long 
-#   df_wide :
-
+# The metro totals are also exported as a csv file
+# named metro_totals.csv
 
 library(reshape)
 library(stringr)
@@ -54,4 +51,8 @@ db$saveTable(df = d, tablename = "cleaned_wide")
 d <- d[d$Race == "Total", c(1, 3:28)]
 db$dropTable(tablename = "metro_totals")
 db$saveTable(df = d, tablename = "metro_totals")
+
+# EXPORT TO CSV
+
+write.table(x = d, file = "metro_totals.csv", row.names = FALSE, sep = ",")
 
